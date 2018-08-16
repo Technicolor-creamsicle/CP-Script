@@ -59,6 +59,6 @@ gufw_on()
 pswd_secure()
 {
 #Makes you able to make passwords secure
-	apt-get cracklib
+	apt-get install cracklib
 	
 
