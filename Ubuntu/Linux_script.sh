@@ -29,7 +29,7 @@ machine="
 "
 #clears the screen and loggs the shell into root
 clear
-sudo su
+tput bel; sudo su
 #prints the logo and sets up to reduce errors
 printf "$machine"
 #setup
@@ -37,7 +37,20 @@ unalias -a
 echo "unalaias -a" >> ~/.bashrc
 echo "unalaias -a" >> /root.bashrc
 #this just unalias everything so less bad stuff happens
-
+fore()
+{
+tput setaf
+}
+back()
+{
+tput setab
+}
+bell()
+{
+tput bel
+}
+#user alert functions
+#</setup>
 sleep 5
 #clears the logo and continues to the actual script
 clear
@@ -59,6 +72,6 @@ gufw_on()
 pswd_secure()
 {
 #Makes you able to make passwords secure
-	apt-get install cracklib
+	apt install libpam-cracklib
 	
-
+	
