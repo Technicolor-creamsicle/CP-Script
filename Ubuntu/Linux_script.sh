@@ -65,6 +65,8 @@ update()
 gufw_on()
 {
 #installs and enables gufw and ufw
+	
+	apt-get install ufw
 	apt-get install gufw
 	ufw enable
 }
@@ -73,6 +75,7 @@ pswd_secure()
 {
 #Makes you able to make passwords secure
 	apt install libpam-cracklib
+	`	
 	
 	
 	
