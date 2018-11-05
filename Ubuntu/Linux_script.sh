@@ -73,9 +73,14 @@ gufw_on()
 
 pswd_secure()
 {
-#Makes you able to make passwords secure
+#Makes passwords secure
 	apt install libpam-cracklib
-	`	
+	cd /etc/pam.d
+	sed -i '25 d' ./common-password
+	sed -i '24 a password        requisite                       pam_cracklib.so retry=3 minlen=8 difok=3 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1' ./common-password
+	sed -i '26 d' ./common-password
+	sed -i '25 a password        [success=1 default=ignore]      pam_unix.so obscure sha512 remember=5 minlen=8' ./common-password
+
 	
 	
 	
