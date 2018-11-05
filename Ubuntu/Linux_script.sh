@@ -76,10 +76,19 @@ pswd_secure()
 #Makes passwords secure
 	apt install libpam-cracklib
 	cd /etc/pam.d
-	sed -i '25 d' ./common-password
-	sed -i '24 a password        requisite                       pam_cracklib.so retry=3 minlen=8 difok=3 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1' ./common-password
-	sed -i '26 d' ./common-password
-	sed -i '25 a password        [success=1 default=ignore]      pam_unix.so obscure sha512 remember=5 minlen=8' ./common-password
+	#error checking to avoid damage to the system
+	if ["$?" -ne "0"]; then
+	echo "Something went wrong skipping this section"
+	sed -i '/(#1)/
+	
+	
+	
+	
+	
+	sed -i '25 d' ./common-password; #!
+	sed -i '24 a password        requisite                       pam_cracklib.so retry=3 minlen=8 difok=3 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1' ./common-password; #1
+	sed -i '26 d' ./common-password; #1
+	sed -i '25 a password        [success=1 default=ignore]      pam_unix.so obscure sha512 remember=5 minlen=8' ./common-password; #1
 
 	
 	
