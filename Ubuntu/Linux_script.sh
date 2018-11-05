@@ -75,7 +75,6 @@ pswd_secure()
 {
 #Makes you able to make passwords secure
 	apt install libpam-cracklib
-	`	
 	
 	
 	
