@@ -49,6 +49,7 @@ bell()
 {
 tput bel
 }
+
 #user alert functions
 #</setup>
 sleep 5
@@ -77,19 +78,35 @@ pswd_secure()
 	apt install libpam-cracklib
 	cd /etc/pam.d
 	#error checking to avoid damage to the system
-	if ["$?" -ne "0"]; then
-	echo "Something went wrong skipping this section"
-	sed -i '/(#1)/ D 
+	if ["$?" == "0"]; then
+		echo "Something went right editing common password"
+		sed -i '/(#1)/ D'
+		else
+		#notify user to ensure to fix passwords manually
+		bell()
+		back(1);fore(0);echo "Something went wonkey edit common-password manually to ensure that something did not break"
+	fi
+	##############owo#############whats this?###################
+	# Here is the dangerous part of editing the file.          #
+	# Sean please test this code on a non important test file. #
+	############################################################
+	
+	#1 sed -i '25 d' ./common-password
+	#1 sed -i '24 a password        requisite                     pam_cracklib.so retry=3 minlen=8 difok=3 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1' ./common-password 
+	#1 sed -i '26 d' ./common-password
+	#1 sed -i '25 a password        [success=1 default=ignore]      pam_unix.so obscure sha512 remember=5 minlen=8' ./common-password
+	
+	#time to edit common-auth
+	sed -i '$ a auth required pam_tally2.so deny=5 onerr=fail unlock_time=1800' ./common-auth
+	}
+	
+install_bum()
+{
+#install bum Boot Up Manager
+	apt-get install bum
+}
 	
 	
-	
-	
-	
-	sed -i '25 d' ./common-password; #!
-	sed -i '24 a password        requisite                       pam_cracklib.so retry=3 minlen=8 difok=3 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1' ./common-password; #1
-	sed -i '26 d' ./common-password; #1
-	sed -i '25 a password        [success=1 default=ignore]      pam_unix.so obscure sha512 remember=5 minlen=8' ./common-password; #1
-
 	
 	
 	
