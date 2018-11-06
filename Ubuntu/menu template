@@ -1,0 +1,19 @@
+title="Select example"
+prompt="Pick an option:"
+options=("Keep" "Delete")
+
+echo "$title"
+PS3="$prompt "
+select opt in "${options[@]}" "Quit"; do 
+
+    case "$REPLY" in
+
+    1 ) echo "You picked $opt which is to Keep the files";;
+    2 ) echo "You picked $opt which is to delete the files";;
+    
+
+    $(( ${#options[@]}+1 )) ) echo "Goodbye!"; break;;
+    * ) echo "Invalid option. Try another one.";continue;;
+
+    esac
+    break
