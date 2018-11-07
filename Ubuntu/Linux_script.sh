@@ -146,7 +146,31 @@ pswd_secure()
 	sed -i '$ a auth required pam_tally2.so deny=5 onerr=fail unlock_time=1800' ./common-auth
 	}
 	
+openssh_install()
+{
+#3 is the safety block
+#install and strengthens openSSH server
+	title="Install open SSH server?"
+	prompt="Pick an option:"
+	options=("Install" "Do not install")
+	
+	echo "$title"
+	PS3="$prompt "
+	select opt in "${options[@]}" "Quit"; do 
 
+	case "$REPLY" in
+	Y ) echo "You picked $opt which is to Install open-ssh server"; sed ' /(#3)/ D' ./
+	N ) echo "You picked $opt which is to not install open ssh server";;
+	
+	* ) echo "Invalid option. Try another one.";continue;;
+
+	esac
+	break
+	
+	#3 apt-get install --yes openssh-server
+	#3 sed (i need more data to make it work
+	#3 sed yeet 
+	
 
 	
 	
