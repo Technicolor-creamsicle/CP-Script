@@ -170,8 +170,7 @@ openssh_install()
 	#3 apt-get install --yes openssh-server
 	#3 sed (i need more data to make it work
 	#3 sed yeet 
-	
-
-	
+	}
+pswd_secure()
 	
 	
